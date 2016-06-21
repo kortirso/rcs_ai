@@ -1,0 +1,19 @@
+default: &default
+  adapter: postgresql
+  pool: 20
+  port: 5432
+  username: <%= ENV['RCS_AI_DATABASE_USERNAME'] %>
+  password: <%= ENV['RCS_AI_DATABASE_PASSWORD'] %>
+  encoding: utf8
+
+development:
+  <<: *default
+  database: rcs_ai_development
+
+test:
+  <<: *default
+  database: rcs_ai_test
+
+production:
+  <<: *default
+  database: rcs_ai_production
