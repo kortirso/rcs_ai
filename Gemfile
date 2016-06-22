@@ -11,9 +11,9 @@ gem 'figaro'
 gem 'foundation-rails'
 gem 'autoprefixer-rails', '5.2.1'
 gem 'slim'
+gem 'whenever', require: false
 
 group :development, :test do
-    gem 'byebug'
     gem 'spring'
     gem 'rspec-rails'
     gem 'factory_girl_rails'
@@ -23,7 +23,6 @@ group :development, :test do
 end
 
 group :development do
-    gem 'web-console', '~> 2.0'
     gem 'capistrano', require: false
     gem 'capistrano-bundler', require: false
     gem 'capistrano-rails', require: false
