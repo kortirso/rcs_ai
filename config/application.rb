@@ -6,6 +6,8 @@ Bundler.require(*Rails.groups)
 
 module RcsAi
     class Application < Rails::Application
+        config.autoload_paths += %W(#{config.root}/lib/modules)
+        config.autoload_paths += %W(#{config.root}/lib/modules/messages)
         config.active_record.raise_in_transactional_callbacks = true
         config.active_record.schema_format = :ruby
         config.generators do |g|
