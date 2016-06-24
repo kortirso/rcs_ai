@@ -34,6 +34,21 @@ class User < ActiveRecord::Base
         res = object.post_request(self.token, challenge_id)
     end
 
+    def get_games_list
+        object = GetGames.new(self.token)
+        res = object.get_request
+    end
+
+    def get_game(game_id)
+        object = GetGame.new(self.token, game_id)
+        res = object.get_request
+    end
+
+    def make_turn
+        object = MakeTurn.new
+        res = object.post_request(self.token, game_id, from, to)
+    end
+
     def self.check_challenges
         all.each { |user| user.get_challenge_list }
     end
