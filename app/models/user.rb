@@ -1,6 +1,8 @@
 require 'net/http'
 
 class User < ActiveRecord::Base
+    has_many :games
+
     validates :username, :email, :password, :power, presence: true
     validates :username, :email, uniqueness: true
 
@@ -37,6 +39,11 @@ class User < ActiveRecord::Base
     def get_games_list
         object = GetGames.new(self.token)
         res = object.get_request
+        if res == 'error'
+            self.get_token
+        else
+            res['games'].each { |game| Game.check_game(game) }
+        end
     end
 
     def get_game(game_id)
