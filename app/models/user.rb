@@ -42,7 +42,7 @@ class User < ActiveRecord::Base
         if res == 'error'
             self.get_token
         else
-            res['games'].each { |game| Game.check_game(game) }
+            Game.check_games(res['games'], self.username)
         end
     end
 
@@ -51,7 +51,7 @@ class User < ActiveRecord::Base
         res = object.get_request
     end
 
-    def make_turn
+    def make_turn(game_id, from, to)
         object = MakeTurn.new
         res = object.post_request(self.token, game_id, from, to)
     end

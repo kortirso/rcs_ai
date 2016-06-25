@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160624081248) do
+ActiveRecord::Schema.define(version: 20160625161537) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,11 +33,12 @@ ActiveRecord::Schema.define(version: 20160624081248) do
     t.boolean  "white_turn",     default: true
     t.float    "game_result"
     t.integer  "offer_draw_by"
-    t.string   "possibles",      default: [],                array: true
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
+    t.string   "possibles",      default: [],                 array: true
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
     t.boolean  "white_side",     default: true
     t.integer  "user_id"
+    t.boolean  "checked",        default: false
   end
 
   add_index "games", ["user_id"], name: "index_games_on_user_id", using: :btree
