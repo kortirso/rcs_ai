@@ -1,12 +1,8 @@
-require 'net/http'
-
 class User < ActiveRecord::Base
     has_many :games
 
     validates :username, :email, :password, :power, presence: true
     validates :username, :email, uniqueness: true
-
-    MAX_GAMES = 10
 
     def get_token
         object = GetToken.new
@@ -39,11 +35,7 @@ class User < ActiveRecord::Base
     def get_games_list
         object = GetGames.new(self.token)
         res = object.get_request
-        if res == 'error'
-            self.get_token
-        else
-            Game.check_games(res['games'], self.username, self.id)
-        end
+        res == 'error' ? self.get_token : Game.check_games(res['games'], self.username, self.id)
     end
 
     def get_game(game_id)
