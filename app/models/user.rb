@@ -51,4 +51,8 @@ class User < ActiveRecord::Base
     def self.check_challenges
         all.each { |user| user.get_challenge_list }
     end
+
+    def self.check_games
+        all.each { |user| user.get_games_list }
+    end
 end
