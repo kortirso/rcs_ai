@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
     def get_profile
         object = GetProfile.new(self.token)
         res = object.get_request
-        res == 'error' ? self.get_token : self.update(elo: res['user']['elo'])
+        res == 'error' ? self.get_token : self.update(elo: res['elo'])
     end
 
     def get_challenge_list
@@ -42,7 +42,7 @@ class User < ActiveRecord::Base
         if res == 'error'
             self.get_token
         else
-            Game.check_games(res['games'], self.username)
+            Game.check_games(res['games'], self.username, self.id)
         end
     end
 
