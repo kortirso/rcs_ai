@@ -22,7 +22,7 @@ class Game < ActiveRecord::Base
             game.create_figures
         else
             if game.white_turn != game_object['white_turn'] || game.offer_draw_by != game_object['offer_draw_by']
-                Game.update white_turn: game_object['white_turn'], game_result: game_object['game_result'], offer_draw_by: game_object['offer_draw_by']
+                game.update white_turn: game_object['white_turn'], game_result: game_object['game_result'], offer_draw_by: game_object['offer_draw_by']
             end
         end
         game.update(checked: true)

@@ -5,20 +5,17 @@ class User < ActiveRecord::Base
     validates :username, :email, uniqueness: true
 
     def get_token
-        object = GetToken.new
-        res = object.post_request(self.username, self.password)
+        res = GetToken.new.post_request(self.username, self.password)
         self.update(token: res['access_token']) if res != 'error'
     end
 
     def get_profile
-        object = GetProfile.new(self.token)
-        res = object.get_request
+        res = GetProfile.new(self.token).get_request
         res == 'error' ? self.get_token : self.update(elo: res['elo'])
     end
 
     def get_challenge_list
-        object = GetChallenges.new(self.token)
-        res = object.get_request
+        res = GetChallenges.new(self.token).get_request
         res == 'error' ? self.get_token : self.choose_challenge_for_game(res['challenges'])
     end
 
@@ -28,24 +25,20 @@ class User < ActiveRecord::Base
     end
 
     def create_game_from_challenge(challenge_id)
-        object = CreateGame.new
-        res = object.post_request(self.token, challenge_id)
+        res = CreateGame.new.post_request(self.token, challenge_id)
     end
 
     def get_games_list
-        object = GetGames.new(self.token)
-        res = object.get_request
+        res = GetGames.new(self.token).get_request
         res == 'error' ? self.get_token : Game.check_games(res['games'], self.username, self.id)
     end
 
     def get_game(game_id)
-        object = GetGame.new(self.token, game_id)
-        res = object.get_request
+        res = GetGame.new(self.token, game_id).get_request
     end
 
     def make_turn(game_id, from, to)
-        object = MakeTurn.new
-        res = object.post_request(self.token, game_id, from, to)
+        res = MakeTurn.new.post_request(self.token, game_id, from, to)
     end
 
     def self.check_challenges
