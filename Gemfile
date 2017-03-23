@@ -1,25 +1,21 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.2.7'
-gem 'pg', '~> 0.15'
+ruby '2.3.0'
+
+gem 'rails', '4.2.8'
+gem 'pg', '~> 0.19'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'therubyracer', platforms: :ruby
 gem 'jquery-rails'
 
 gem 'figaro'
-gem 'foundation-rails'
-gem 'autoprefixer-rails', '5.2.1'
-gem 'slim'
 gem 'whenever', require: false
 
 group :development, :test do
     gem 'spring'
     gem 'rspec-rails'
     gem 'factory_girl_rails'
-    gem 'capybara'
-    gem 'database_cleaner'
-    gem 'capybara-webkit'
 end
 
 group :development do
