@@ -11,6 +11,7 @@ gem 'jquery-rails'
 
 gem 'figaro'
 gem 'whenever', require: false
+gem 'slim'
 
 group :development, :test do
     gem 'spring'
